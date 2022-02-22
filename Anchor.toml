@@ -1,0 +1,12 @@
+[programs.localnet]
+solana_blog = "9muDycj4AvNNTKpMVdZJZfhS72YLRFAt2ZwEQDWKoDom"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "/Users/celiakwan/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
