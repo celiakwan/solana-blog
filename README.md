@@ -1,5 +1,5 @@
 # solana-blog
-An example of creating a Solana program to build a blog and create posts using Anchor. It demonstrates how PDAs are generated and how they work.
+An example of creating a Solana program to build a blog and create posts using Anchor. It demonstrates how program derived addresses are generated and how they work.
 
 ### Version
 - [Solana Tool Suite](https://solana.com/): 1.8.12
