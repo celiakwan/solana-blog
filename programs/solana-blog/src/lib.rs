@@ -5,14 +5,19 @@ declare_id!("9muDycj4AvNNTKpMVdZJZfhS72YLRFAt2ZwEQDWKoDom");
 #[program]
 pub mod solana_blog {
     use super::*;
-    
+
     pub fn initialize(ctx: Context<Initialize>, bump: u8) -> ProgramResult {
         ctx.accounts.blog_account.bump = bump;
         ctx.accounts.blog_account.user = *ctx.accounts.user.key;
         Ok(())
     }
 
-    pub fn create_post(ctx: Context<CreatePost>, bump: u8, title: String, body: String) -> ProgramResult {
+    pub fn create_post(
+        ctx: Context<CreatePost>,
+        bump: u8,
+        title: String,
+        body: String,
+    ) -> ProgramResult {
         ctx.accounts.blog_account.post_count += 1;
         ctx.accounts.post_account.bump = bump;
         ctx.accounts.post_account.user = *ctx.accounts.user.key;
@@ -40,7 +45,7 @@ pub struct Initialize<'info> {
     pub blog_account: Account<'info, Blog>,
     #[account(mut)]
     pub user: Signer<'info>,
-    pub system_program: Program<'info, System>
+    pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
@@ -57,7 +62,7 @@ pub struct CreatePost<'info> {
     )]
     pub post_account: Account<'info, Post>,
     pub user: Signer<'info>,
-    pub system_program: Program<'info, System>
+    pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
@@ -66,7 +71,7 @@ pub struct UpdatePost<'info> {
     pub blog_account: Account<'info, Blog>,
     #[account(mut, has_one = user)]
     pub post_account: Account<'info, Post>,
-    pub user: Signer<'info>
+    pub user: Signer<'info>,
 }
 
 #[account]
@@ -74,7 +79,7 @@ pub struct UpdatePost<'info> {
 pub struct Blog {
     pub bump: u8,
     pub user: Pubkey,
-    pub post_count: u8
+    pub post_count: u8,
 }
 
 #[account]
@@ -83,5 +88,5 @@ pub struct Post {
     pub bump: u8,
     pub user: Pubkey,
     pub title: String,
-    pub body: String
+    pub body: String,
 }
